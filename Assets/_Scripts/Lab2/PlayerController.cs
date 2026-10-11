@@ -48,10 +48,16 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Enemy"))
         {
+            SoundManager.Instance.PlayLose();
             Destroy(gameObject);
             WinText.SetActive(true);
             WinText.GetComponent<TextMeshProUGUI>().color = Color.red;
             WinText.GetComponent<TextMeshProUGUI>().text = "You Lose";
+        }
+        else if (collision.gameObject.CompareTag("Wall"))
+        {
+            float volume = Mathf.Clamp01(collision.relativeVelocity.magnitude / 10f);
+            SoundManager.Instance.PlayWallHit(volume);
         }
     }
 
@@ -60,7 +66,9 @@ public class PlayerController : MonoBehaviour
         countText.text = "Count: " + count.ToString();
 
         if(count == 10)
+        {
             WinText.SetActive(true);
-        
+            SoundManager.Instance.PlayWin();
+        }
     }
 }

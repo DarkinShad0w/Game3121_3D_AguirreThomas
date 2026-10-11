@@ -6,6 +6,8 @@ TagManager:
   tags:
   - PickUp
   - Enemy
+  - CinemachineTarget
+  - Wall
   layers:
   - Default
   - TransparentFX
